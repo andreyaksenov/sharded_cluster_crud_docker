@@ -4,21 +4,23 @@
 
 1. Run Docker.
 
-2. Copy the Enterprise SDK archive (`tarantool-enterprise-sdk-<version>.tar.gz`) to the `sdk` folder next to `Dockerfile`.
+2. Copy the Enterprise SDK and TCM archives (`tarantool-enterprise-sdk-<version>.tar.gz`, `tcm-<version>.tar.gz`) to the `sdk` folder next to `Dockerfile`.
 
-3. (Optional) If you use macOS aarch64, set the platform:
+3. Update archive names in `Dockerfile`.
+
+4. (Optional) If you use macOS aarch64, set the platform:
 
    ```shell
    $ export DOCKER_DEFAULT_PLATFORM=linux/amd64
    ```
 
-4. Build the image:
+5. Build the image:
 
    ```shell
    $ docker build -t my-application .
    ```
 
-5. Execute `docker compose up`:
+6. Execute `docker compose up`:
 
    ```shell
    $ docker compose up
