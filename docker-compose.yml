@@ -10,7 +10,9 @@ services:
     - TCM_STORAGE_ETCD_EMBED_PEER_ENDPOINTS=http://0.0.0.0:2380
     - TCM_STORAGE_ETCD_EMBED_PEER_ADVERTISES=http://0.0.0.0:2380
     - TCM_STORAGE_ETCD_ENDPOINTS=http://0.0.0.0:2379
-    command: ./tcm --storage.etcd.embed.enabled
+    command: >
+        bash -c "source tarantool-enterprise/env.sh
+        && ./tcm --storage.etcd.embed.enabled"
     ports:
       - "8080:8080"
       - "80:80"
