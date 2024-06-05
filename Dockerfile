@@ -8,5 +8,7 @@ WORKDIR /home/${user}
 RUN mkdir test-env
 COPY --chown=${user} . test-env
 WORKDIR /home/${user}/test-env
-RUN tar xvf sdk/tarantool-enterprise-sdk-gc64-3.0.0-0-gf58f7d82a-r23.linux.x86_64.tar.gz
+RUN tar xvf sdk/tarantool-enterprise-sdk-gc64-3.1.0-0-g663f509a2-r17.linux.x86_64.tar.gz
+RUN tar xvf sdk/tcm-1.1.0-57-g28e385d16.linux.amd64.tar.gz
 RUN chmod +x tarantool-enterprise/env.sh
+RUN chmod +x tcm
