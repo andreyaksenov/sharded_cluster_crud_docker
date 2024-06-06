@@ -46,17 +46,10 @@
    ```shell
    WRN Generated super admin credentials login=admin password=tF1FAurUm5mQhsrmaeHNDUIb0LKvZQAv
    ...
+   
+3. Click the `Actions` button on the `Stateboard` page and choose `Bootstrap vshard`.
 
-3. Open the router's console and perform the initial cluster bootstrap:
-
-   ```shell
-   sharded_cluster_crud:router-a-001> vshard.router.bootstrap()
-   ---
-   - true
-   ...
-   ```
-
-4. To insert sample data, call `crud.insert_many()` on the router:
+4. To insert sample data, open the router's console and call `crud.insert_many()`:
 
    ```lua
    crud.insert_many('bands', {
