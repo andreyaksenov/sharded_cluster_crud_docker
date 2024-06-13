@@ -35,8 +35,21 @@ services:
       - "3303:3303"
       - "3304:3304"
       - "3305:3305"
+      - "3306:3306"
+      - "3307:3307"
     depends_on:
       - tcm
+
+  failover_coordinator:
+    image: my-application
+    networks:
+    - cluster_network
+    command: >
+        bash -c "source tarantool-enterprise/env.sh
+        && tarantool --failover --config instances.enabled/sharded_cluster_tcm/config.yaml > /dev/null"
+    depends_on:
+      - tcm
+      - tarantool
 networks:
   cluster_network:
     name: cluster_network
