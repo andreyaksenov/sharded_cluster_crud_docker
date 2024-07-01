@@ -3,6 +3,9 @@ credentials:
     replicator:
       password: 'topsecret'
       roles: [ replication ]
+      privileges:
+      - permissions: [ execute ]
+        functions: [ 'vshard.storage.buckets_count' ]
     storage:
       password: 'secret'
       roles: [ sharding ]
@@ -118,6 +121,8 @@ groups:
       roles: [ router ]
     replicasets:
       router-a:
+        labels:
+          dc: 'west'
         instances:
           router-a-001:
             iproto:
