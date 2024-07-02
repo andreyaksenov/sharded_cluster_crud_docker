@@ -34,8 +34,6 @@ groups:
       failover: election
     replicasets:
       storage-a:
-        labels:
-          shard: 'A'
         instances:
           storage-a-001:
             labels:
@@ -56,55 +54,41 @@ groups:
           storage-a-003:
             labels:
               dc: 'east'
+            replication:
+              election_mode: 'voter'
             iproto:
               listen:
               - uri: 'tarantool:3304'
               advertise:
                 client: 'tarantool:3304'
-          storage-a-004:
-            labels:
-              dc: 'east'
-            iproto:
-              listen:
-              - uri: 'tarantool:3305'
-              advertise:
-                client: 'tarantool:3305'
       storage-b:
-        labels:
-          shard: 'B'
         instances:
           storage-b-001:
             labels:
               dc: 'west'
             iproto:
               listen:
-              - uri: 'tarantool:3306'
+              - uri: 'tarantool:3312'
               advertise:
-                client: 'tarantool:3306'
+                client: 'tarantool:3312'
           storage-b-002:
             labels:
               dc: 'west'
             iproto:
               listen:
-              - uri: 'tarantool:3307'
+              - uri: 'tarantool:3313'
               advertise:
-                client: 'tarantool:3307'
+                client: 'tarantool:3313'
           storage-b-003:
             labels:
               dc: 'east'
+            replication:
+              election_mode: 'voter'
             iproto:
               listen:
-              - uri: 'tarantool:3308'
+              - uri: 'tarantool:3314'
               advertise:
-                client: 'tarantool:3308'
-          storage-b-004:
-            labels:
-              dc: 'east'
-            iproto:
-              listen:
-              - uri: 'tarantool:3309'
-              advertise:
-                client: 'tarantool:3309'
+                client: 'tarantool:3314'
   routers:
     roles: [ roles.crud-router ]
     roles_cfg:
