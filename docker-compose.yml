@@ -21,6 +21,8 @@ services:
 
   tarantool:
     image: my-application
+    volumes:
+    - ./tmp/var:/home/sampleuser/test-env/instances.enabled/sharded_cluster_tcm/var
     networks:
     - cluster_network
     command: >
