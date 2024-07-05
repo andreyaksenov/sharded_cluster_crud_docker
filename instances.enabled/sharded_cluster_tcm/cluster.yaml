@@ -90,7 +90,7 @@ groups:
               advertise:
                 client: 'tarantool:3314'
   routers:
-    roles: [ roles.crud-router ]
+    roles: [ roles.crud-router, enable_metrics ]
     roles_cfg:
       roles.crud-router:
         stats: true
@@ -109,6 +109,10 @@ groups:
           dc: 'west'
         instances:
           router-a-001:
+            metrics:
+              include: [ all ]
+              labels:
+                alias: '{{ instance_name }}'
             iproto:
               listen:
               - uri: 'tarantool:3301'

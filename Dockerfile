@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y git build-essential cmake make cpio bin
 USER ${user}
 WORKDIR /home/${user}
 RUN mkdir test-env
-COPY --chown=${user} . test-env
+COPY --chown=${user} ../.. test-env
 WORKDIR /home/${user}/test-env
 RUN tar xvf sdk/tarantool-enterprise-sdk-gc64-3.1.0-0-g663f509a2-r19.linux.x86_64.tar.gz
 RUN tar xvf sdk/tcm-1.1.0-60-ge4aadb7de.linux.amd64.tar.gz
