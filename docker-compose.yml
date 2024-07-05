@@ -18,7 +18,6 @@ services:
       - "80:80"
       - "2379:2379"
       - "2380:2380"
-
   tarantool:
     image: my-application
     volumes:
@@ -29,6 +28,7 @@ services:
         bash -c "source tarantool-enterprise/env.sh
         && tt cluster publish "http://tcm:2379/default" instances.enabled/sharded_cluster_tcm/cluster.yaml --force
         && tt build sharded_cluster_tcm
+        && tt rocks install http
         && tt start sharded_cluster_tcm
         && tail -f /dev/null"
     ports:
@@ -39,8 +39,32 @@ services:
       - "3312:3312"
       - "3313:3313"
       - "3314:3314"
+      - "8081:8081"
     depends_on:
       - tcm
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+    networks:
+    - cluster_network
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+    networks:
+    - cluster_network
 
 #  failover_coordinator:
 #    image: my-application
